@@ -1,0 +1,9 @@
+xcuserdata/
+.DS_Store
+bin/
+/vendor
+/.installed-gemfile
+/fastlane/README.md
+/fastlane/report.xml
+/fastlane/test_output/
+.env*
