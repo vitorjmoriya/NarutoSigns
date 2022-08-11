@@ -14,25 +14,19 @@ struct MainView: View {
     var body: some View {
         ZStack {
             CameraPreview(session: viewModel.captureSession)
-//                .onAppear {
-//                    viewModel.captureSession.startRunning()
-//                }
-//                .onDisappear {
-//                    viewModel.captureSession.stopRunning()
-//                }
                 .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .leading) {
-                Button(action:  {print("Tapped") } ) {
-                    Text("TAP ME")
-                        .foregroundColor(.red)
-                }
-            }
+
+            Text(viewModel.label)
+                .foregroundColor(.white)
+                .font(.system(size: 50))
+                .padding(.top, 50)
         }
     }
 }
 
 extension MainView {
     class ViewModel: ObservableObject {
+        @Published var label: String = ""
         let captureSession: AVCaptureSession
 
         init(captureSession: AVCaptureSession) {
