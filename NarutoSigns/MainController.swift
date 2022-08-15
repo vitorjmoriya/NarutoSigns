@@ -42,6 +42,7 @@ class MainController: UIHostingController<MainView> {
             for: .video,
             position: .front
         ) else {
+            // TOOD: Handle error in UI
             print("## No frontal camera found")
             return
         }
@@ -76,9 +77,8 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         let handPoseRequest: VNDetectHumanHandPoseRequest = .init()
 
-        handPoseRequest.maximumHandCount = 1
+        let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer)
 
-        let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer, orientation: .up, options: [:])
         do {
             try handler.perform([handPoseRequest])
             guard let observation = handPoseRequest.results?.first else {
@@ -94,10 +94,13 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             let handPosePrediction = try ModelSingleton.shared.model.prediction(input: input)
 
-            print(handPosePrediction.labelProbabilities)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            DispatchQueue.main.async {
-                self.viewModel.label = handPosePrediction.label
+                if self.viewModel.gestures.count == 4 {
+                    self.viewModel.gestures.removeFirst()
+                }
+                self.viewModel.gestures.append(handPosePrediction.label)
             }
         } catch {
             print(error)

@@ -15,18 +15,21 @@ struct MainView: View {
         ZStack {
             CameraPreview(session: viewModel.captureSession)
                 .edgesIgnoringSafeArea(.all)
-
-            Text(viewModel.label)
-                .foregroundColor(.white)
-                .font(.system(size: 50))
-                .padding(.top, 50)
+            VStack {
+                ForEach(viewModel.gestures, id: \.self) { gesture in
+                    Text(gesture)
+                        .foregroundColor(.white)
+                        .font(.system(size: 50))
+                        .padding(.top, 50)
+                }
+            }
         }
     }
 }
 
 extension MainView {
     class ViewModel: ObservableObject {
-        @Published var label: String = ""
+        @Published var gestures: [String] = []
         let captureSession: AVCaptureSession
 
         init(captureSession: AVCaptureSession) {
