@@ -64,6 +64,7 @@ public struct CameraPreview: UIViewRepresentable {
 
     public func makeUIView(context: Context) -> VideoPreviewView {
         self.view.videoPreviewLayer.session = self.session
+        self.view.videoPreviewLayer.connection?.videoOrientation = .landscapeLeft
         return self.view
     }
 
