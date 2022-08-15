@@ -98,7 +98,7 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 guard let self = self else { return }
 
                 if self.viewModel.gestures.count == 4 {
-                    self.viewModel.gestures.removeFirst()
+                    self.viewModel.gestures.removeAll()
                 }
                 self.viewModel.gestures.append(handPosePrediction.label)
             }

@@ -15,13 +15,18 @@ struct MainView: View {
         ZStack {
             CameraPreview(session: viewModel.captureSession)
                 .edgesIgnoringSafeArea(.all)
+
             VStack {
-                ForEach(viewModel.gestures, id: \.self) { gesture in
-                    Text(gesture)
-                        .foregroundColor(.white)
-                        .font(.system(size: 50))
-                        .padding(.top, 50)
+                Spacer()
+                HStack(spacing: 10) {
+                    ForEach(viewModel.gestures, id: \.self) { gesture in
+                        Text(gesture)
+                            .foregroundColor(.white)
+                            .font(.system(size: 50))
+                    }
                 }
+                .padding(.bottom, 10)
+                .padding(.leading, 10)
             }
         }
     }
