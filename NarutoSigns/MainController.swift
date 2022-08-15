@@ -16,7 +16,7 @@ class MainController: UIHostingController<MainView> {
     private let viewModel: MainView.ViewModel
 
     var lastSampleDate = Date.distantPast
-    let sampleInterval: TimeInterval = 2 // 5 seconds
+    let sampleInterval: TimeInterval = 1 // 1 second
 
     init() {
         self.captureSession = .init()
@@ -89,11 +89,10 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 return
             }
 
-            let handSignClassifier: NarutoSigns = try NarutoSigns(configuration: .init())
 
             let input: NarutoSignsInput = .init(poses: array)
 
-            let handPosePrediction = try handSignClassifier.prediction(input: input)
+            let handPosePrediction = try ModelSingleton.shared.model.prediction(input: input)
 
             print(handPosePrediction.labelProbabilities)
 
@@ -102,6 +101,21 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         } catch {
             print(error)
+        }
+    }
+}
+
+struct ModelSingleton {
+    static let shared = ModelSingleton()
+
+    let model: NarutoSigns
+
+    init() {
+        do {
+            self.model = try NarutoSigns(configuration: .init())
+        }
+        catch {
+            fatalError(error.localizedDescription)
         }
     }
 }
