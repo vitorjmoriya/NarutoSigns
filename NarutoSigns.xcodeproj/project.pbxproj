@@ -13,7 +13,7 @@
 		5F2061DF289BE84B006FD1A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F2061DE289BE84B006FD1A7 /* Preview Assets.xcassets */; };
 		5F2061E7289BF947006FD1A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */; };
 		5F2061E9289BF9CB006FD1A7 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2061E8289BF9CB006FD1A7 /* MainController.swift */; };
-		5FB2CBC228A52F0D00045EBA /* NarutoSigns.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FB2CBC128A52F0D00045EBA /* NarutoSigns.mlmodel */; };
+		5FE6A70328AA87460068BF73 /* NarutoSigns.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		5F2061E5289BF481006FD1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5F2061E8289BF9CB006FD1A7 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		5FB2CBC128A52F0D00045EBA /* NarutoSigns.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = NarutoSigns.mlmodel; path = ../../Model/NarutoSigns.mlmodel; sourceTree = "<group>"; };
+		5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NarutoSigns.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				5F2061DD289BE84B006FD1A7 /* Preview Content */,
 				5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */,
 				5F2061E8289BF9CB006FD1A7 /* MainController.swift */,
-				5FB2CBC128A52F0D00045EBA /* NarutoSigns.mlmodel */,
+				5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */,
 			);
 			path = NarutoSigns;
 			sourceTree = "<group>";
@@ -148,9 +148,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FE6A70328AA87460068BF73 /* NarutoSigns.mlmodel in Sources */,
 				5F2061E9289BF9CB006FD1A7 /* MainController.swift in Sources */,
 				5F2061DA289BE847006FD1A7 /* MainView.swift in Sources */,
-				5FB2CBC228A52F0D00045EBA /* NarutoSigns.mlmodel in Sources */,
 				5F2061D8289BE847006FD1A7 /* NarutoSignsApp.swift in Sources */,
 				5F2061E7289BF947006FD1A7 /* SceneDelegate.swift in Sources */,
 			);
@@ -281,6 +281,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NarutoSigns/Preview Content\"";
+				DEVELOPMENT_TEAM = 43LD5G2J6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NarutoSigns/Info.plist;
@@ -310,6 +311,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NarutoSigns/Preview Content\"";
+				DEVELOPMENT_TEAM = 43LD5G2J6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NarutoSigns/Info.plist;
