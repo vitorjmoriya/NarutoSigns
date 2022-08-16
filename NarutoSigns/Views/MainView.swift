@@ -12,23 +12,47 @@ struct MainView: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             CameraView(session: viewModel.captureSession)
                 .edgesIgnoringSafeArea(.all)
 
+            renderControls()
+
             VStack {
                 Spacer()
-                Text(viewModel.detectedHandSign.rawValue)
-                    .foregroundColor(.white)
-                    .font(Font.custom("Ninja-Naruto", size: 60))
+                if let sign = viewModel.detectedHandSign {
+                    Text(sign.rawValue)
+                        .foregroundColor(.white)
+                        .font(Font.custom("Ninja-Naruto", size: 60))
+                }
             }
+        }
+    }
+
+    @ViewBuilder private func renderControls() -> some View {
+        VStack {
+            HStack {
+                Spacer()
+                Button(action: {}) {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(.orange)
+                        .padding(8)
+                        .background(.white)
+                        .cornerRadius(16)
+                }
+                .padding(.top, 16)
+                .padding(.trailing, 8)
+            }
+            Spacer()
         }
     }
 }
 
 extension MainView {
     class ViewModel: ObservableObject {
-        @Published var detectedHandSign: Sign = .bird
+        @Published var detectedHandSign: Sign? = nil
 
         let captureSession: AVCaptureSession
 
