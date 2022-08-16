@@ -17,9 +17,10 @@ struct MainView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
+                Spacer()
                 Text(viewModel.detectedHandSign)
                     .foregroundColor(.white)
-                    .font(.system(size: 50))
+                    .font(Font.custom("Ninja-Naruto", size: 60))
             }
         }
     }
