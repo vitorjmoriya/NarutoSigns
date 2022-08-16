@@ -94,6 +94,7 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
         do {
             try handler.perform([handPoseRequest])
             guard let observation = handPoseRequest.results?.first else {
+                setSign(from: nil)
                 return
             }
 
@@ -105,15 +106,26 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             let handPosePrediction = try HandsignModel.shared.model.prediction(input: input)
 
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-
-                let sign = Sign.getSignFromString(string: handPosePrediction.label)
-
-                self.handSignManager.addHandSign(sign: sign)
-            }
+            setSign(from: handPosePrediction.label)
         } catch {
             print(error)
+        }
+    }
+
+    private func setSign(from signString: String?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            guard
+                let signString = signString
+            else {
+                self.viewModel.detectedHandSign = nil
+                return
+            }
+
+            let sign = Sign.getSignFromString(string: signString)
+
+            self.handSignManager.addHandSign(sign: sign)
         }
     }
 }
