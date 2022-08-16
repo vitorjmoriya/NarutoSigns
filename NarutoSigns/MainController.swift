@@ -42,7 +42,7 @@ class MainController: UIHostingController<MainView> {
             for: .video,
             position: .front
         ) else {
-            // TOOD: Handle error in UI
+            // TODO: Handle error in UI
             print("## No frontal camera found")
             return
         }
@@ -88,7 +88,6 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
             guard let array = try? observation.keypointsMultiArray() else {
                 return
             }
-
 
             let input: NarutoSignsInput = .init(poses: array)
 
