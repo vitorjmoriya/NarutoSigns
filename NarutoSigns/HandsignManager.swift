@@ -6,9 +6,9 @@
 //
 
 class HandsignManager {
-    var handSigns: [String]
+    var handSigns: [Sign]
 
-    var onDetectedHandSign: ((String) -> Void)?
+    var onDetectedHandSign: ((Sign) -> Void)?
 
     static let shared = HandsignManager()
 
@@ -16,7 +16,7 @@ class HandsignManager {
         self.handSigns = []
     }
 
-    func addHandSign(sign: String) {
+    func addHandSign(sign: Sign) {
         if handSigns.count == 4 {
             getDetectedHandSign()
             handSigns.removeAll()
@@ -25,7 +25,7 @@ class HandsignManager {
     }
 
     private func getDetectedHandSign() {
-        var dict: [String: Int] = [:]
+        var dict: [Sign: Int] = [:]
 
         guard var mostDetectedSign = handSigns.first else {
             // TODO: Log error here

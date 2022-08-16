@@ -108,7 +108,9 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
 
-                self.handSignManager.addHandSign(sign: handPosePrediction.label)
+                let sign = Sign.getSignFromString(string: handPosePrediction.label)
+
+                self.handSignManager.addHandSign(sign: sign)
             }
         } catch {
             print(error)

@@ -18,7 +18,7 @@ struct MainView: View {
 
             VStack {
                 Spacer()
-                Text(viewModel.detectedHandSign)
+                Text(viewModel.detectedHandSign.rawValue)
                     .foregroundColor(.white)
                     .font(Font.custom("Ninja-Naruto", size: 60))
             }
@@ -28,7 +28,7 @@ struct MainView: View {
 
 extension MainView {
     class ViewModel: ObservableObject {
-        @Published var detectedHandSign: String = ""
+        @Published var detectedHandSign: Sign = .bird
 
         let captureSession: AVCaptureSession
 
