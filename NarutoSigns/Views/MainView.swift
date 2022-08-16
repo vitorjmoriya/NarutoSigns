@@ -17,16 +17,9 @@ struct MainView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                Spacer()
-                HStack(spacing: 10) {
-                    ForEach(viewModel.gestures, id: \.self) { gesture in
-                        Text(gesture)
-                            .foregroundColor(.white)
-                            .font(.system(size: 50))
-                    }
-                }
-                .padding(.bottom, 10)
-                .padding(.leading, 10)
+                Text(viewModel.detectedHandSign)
+                    .foregroundColor(.white)
+                    .font(.system(size: 50))
             }
         }
     }
@@ -34,7 +27,8 @@ struct MainView: View {
 
 extension MainView {
     class ViewModel: ObservableObject {
-        @Published var gestures: [String] = []
+        @Published var detectedHandSign: String = ""
+
         let captureSession: AVCaptureSession
 
         init(captureSession: AVCaptureSession) {

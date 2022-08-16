@@ -15,6 +15,8 @@ class MainController: UIHostingController<MainView> {
 
     private let viewModel: MainView.ViewModel
 
+    private let handSignManager: HandsignManager = HandsignManager.shared
+
     var lastSampleDate = Date.distantPast
     let sampleInterval: TimeInterval = 1 // 1 second
 
@@ -30,6 +32,8 @@ class MainController: UIHostingController<MainView> {
         super.init(rootView: view)
 
         setupCamera()
+
+        setupManager()
     }
 
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
@@ -62,6 +66,14 @@ class MainController: UIHostingController<MainView> {
         }
 
         self.captureSession.startRunning()
+    }
+
+    private func setupManager() {
+        self.handSignManager.onDetectedHandSign = { [weak self] sign in
+            guard let self = self else { return }
+
+            self.viewModel.detectedHandSign = sign
+        }
     }
 }
 
@@ -96,10 +108,7 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
 
-                if self.viewModel.gestures.count == 4 {
-                    self.viewModel.gestures.removeAll()
-                }
-                self.viewModel.gestures.append(handPosePrediction.label)
+                self.handSignManager.addHandSign(sign: handPosePrediction.label)
             }
         } catch {
             print(error)

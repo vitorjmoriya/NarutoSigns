@@ -16,6 +16,7 @@
 		5FE6A70328AA87460068BF73 /* NarutoSigns.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */; };
 		5FE6A70628AA91500068BF73 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70528AA91500068BF73 /* CameraView.swift */; };
 		5FE6A70828ABB6420068BF73 /* HandsignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70728ABB6420068BF73 /* HandsignModel.swift */; };
+		5FE6A70A28ABC12A0068BF73 /* HandsignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NarutoSigns.mlmodel; sourceTree = "<group>"; };
 		5FE6A70528AA91500068BF73 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		5FE6A70728ABB6420068BF73 /* HandsignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsignModel.swift; sourceTree = "<group>"; };
+		5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsignManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				5F2061E8289BF9CB006FD1A7 /* MainController.swift */,
 				5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */,
 				5FE6A70728ABB6420068BF73 /* HandsignModel.swift */,
+				5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */,
 			);
 			path = NarutoSigns;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				5FE6A70628AA91500068BF73 /* CameraView.swift in Sources */,
 				5F2061D8289BE847006FD1A7 /* NarutoSignsApp.swift in Sources */,
 				5F2061E7289BF947006FD1A7 /* SceneDelegate.swift in Sources */,
+				5FE6A70A28ABC12A0068BF73 /* HandsignManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
