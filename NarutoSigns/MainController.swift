@@ -91,7 +91,7 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             let input: NarutoSignsInput = .init(poses: array)
 
-            let handPosePrediction = try ModelSingleton.shared.model.prediction(input: input)
+            let handPosePrediction = try HandsignModel.shared.model.prediction(input: input)
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -103,21 +103,6 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         } catch {
             print(error)
-        }
-    }
-}
-
-struct ModelSingleton {
-    static let shared = ModelSingleton()
-
-    let model: NarutoSigns
-
-    init() {
-        do {
-            self.model = try NarutoSigns(configuration: .init())
-        }
-        catch {
-            fatalError(error.localizedDescription)
         }
     }
 }
