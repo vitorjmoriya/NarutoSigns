@@ -10,18 +10,30 @@ class HandsignManager {
 
     var onDetectedHandSign: ((Sign) -> Void)?
 
+    private var isBoarSign: Bool = false
+
     static let shared = HandsignManager()
 
     init() {
         self.handSigns = []
     }
 
-    func addHandSign(sign: Sign) {
+    func addHandSign(sign: NarutoSignsOutput) {
+        // This sign is the most difficult to execute & to detect, so we are giving a little help
+        if let signBoar = sign.labelProbabilities["boar"] {
+            if signBoar > 0.15 {
+                isBoarSign = true
+            }
+        }
+
+        let signModel = Sign.getSignFromString(string: sign.label)
+
         if handSigns.count == 4 {
             getDetectedHandSign()
             handSigns.removeAll()
+            isBoarSign = false
         }
-        handSigns.append(sign)
+        handSigns.append(signModel)
     }
 
     private func getDetectedHandSign() {
@@ -41,6 +53,10 @@ class HandsignManager {
             }
         }
 
-        onDetectedHandSign?(mostDetectedSign)
+        if isBoarSign {
+            onDetectedHandSign?(.boar)
+        } else {
+            onDetectedHandSign?(mostDetectedSign)
+        }
     }
 }

@@ -106,24 +106,22 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             let handPosePrediction = try HandsignModel.shared.model.prediction(input: input)
 
-            setSign(from: handPosePrediction.label)
+            setSign(from: handPosePrediction)
         } catch {
             print(error)
         }
     }
 
-    private func setSign(from signString: String?) {
+    private func setSign(from sign: NarutoSignsOutput?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
             guard
-                let signString = signString
+                let sign = sign
             else {
                 self.viewModel.detectedHandSign = nil
                 return
             }
-
-            let sign = Sign.getSignFromString(string: signString)
 
             self.handSignManager.addHandSign(sign: sign)
         }
