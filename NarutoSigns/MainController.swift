@@ -17,8 +17,12 @@ class MainController: UIHostingController<MainView> {
 
     private let handSignManager: HandsignManager = HandsignManager.shared
 
-    var lastSampleDate = Date.distantPast
-    let sampleInterval: TimeInterval = 1 // 1 second
+    private var lastTimeSignDetected: Date = .now
+    private let intervalBetweenFrames: TimeInterval = 1 // 1 second
+
+    private var cooldownTimer: Timer = .init()
+    private var timeElapsed: Int = 0
+    private let cooldownTime: Int = 3
 
     init() {
         self.captureSession = .init()
@@ -34,6 +38,8 @@ class MainController: UIHostingController<MainView> {
         setupCamera()
 
         setupManager()
+
+        self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: verifyCooldownTimer)
     }
 
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
@@ -73,19 +79,41 @@ class MainController: UIHostingController<MainView> {
             guard let self = self else { return }
 
             self.viewModel.detectedHandSign = sign
+            self.timeElapsed = 0
+            self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: self.verifyCooldownTimer)
         }
     }
-}
 
-extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
-
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        let currentDate = Date()
-        guard currentDate.timeIntervalSince(lastSampleDate) >= sampleInterval else {
+    private func verifyCooldownTimer(timer: Timer) {
+        print(timeElapsed)
+        guard timeElapsed >= cooldownTime else {
+            self.viewModel.detectedHandSign = nil
+            timeElapsed += 1
+            DispatchQueue.main.async {
+                self.viewModel.cooldownTime = self.timeElapsed
+            }
             return
         }
 
-        lastSampleDate = currentDate
+        timer.invalidate()
+        self.viewModel.cooldownTime = nil
+    }
+}
+
+// TODO: Create a separate file with the delegate implementation
+extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard !cooldownTimer.isValid else {
+            return
+        }
+
+        let currentDate = Date()
+        guard currentDate.timeIntervalSince(lastTimeSignDetected) >= intervalBetweenFrames else {
+            return
+        }
+
+        lastTimeSignDetected = currentDate
 
         let handPoseRequest: VNDetectHumanHandPoseRequest = .init()
 

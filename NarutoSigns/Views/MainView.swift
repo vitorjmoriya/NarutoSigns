@@ -16,16 +16,26 @@ struct MainView: View {
             CameraView(session: viewModel.captureSession)
                 .edgesIgnoringSafeArea(.all)
 
+            renderCooldownTimer()
+
             renderControls()
 
             VStack {
                 Spacer()
-                if let sign = viewModel.detectedHandSign {
+                if let sign = viewModel.detectedHandSign, viewModel.cooldownTime == nil {
                     Text(sign.rawValue)
                         .foregroundColor(.white)
                         .font(Font.custom("Ninja-Naruto", size: 60))
                 }
             }
+        }
+    }
+
+    @ViewBuilder private func renderCooldownTimer() -> some View {
+        if let cooldownTime = viewModel.cooldownTime {
+            Text(String(cooldownTime))
+                .foregroundColor(.white)
+                .font(Font.custom("Ninja-Naruto", size: 60))
         }
     }
 
@@ -53,6 +63,7 @@ struct MainView: View {
 extension MainView {
     class ViewModel: ObservableObject {
         @Published var detectedHandSign: Sign? = nil
+        @Published var cooldownTime: Int? = nil
 
         let captureSession: AVCaptureSession
 
