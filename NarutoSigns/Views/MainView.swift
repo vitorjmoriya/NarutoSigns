@@ -18,7 +18,7 @@ struct MainView: View {
 
             renderCooldownTimer()
 
-            renderControls()
+//            renderControls()
 
             VStack {
                 Spacer()
