@@ -13,9 +13,9 @@
 		5F2061DF289BE84B006FD1A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F2061DE289BE84B006FD1A7 /* Preview Assets.xcassets */; };
 		5F2061E7289BF947006FD1A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */; };
 		5F2061E9289BF9CB006FD1A7 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2061E8289BF9CB006FD1A7 /* MainController.swift */; };
-		5F57189928B3A990002A86D2 /* NarutoSigns.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5F57189828B3A990002A86D2 /* NarutoSigns.mlmodel */; };
 		5F81B43128ABD34600881FC4 /* Ninja-Naruto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F81B42F28ABCBBF00881FC4 /* Ninja-Naruto.ttf */; };
 		5F81B43428ABD65E00881FC4 /* Signs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F81B43328ABD65E00881FC4 /* Signs.swift */; };
+		5FE6A70328AA87460068BF73 /* NarutoSigns.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */; };
 		5FE6A70628AA91500068BF73 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70528AA91500068BF73 /* CameraView.swift */; };
 		5FE6A70828ABB6420068BF73 /* HandsignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70728ABB6420068BF73 /* HandsignModel.swift */; };
 		5FE6A70A28ABC12A0068BF73 /* HandsignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */; };
@@ -30,9 +30,9 @@
 		5F2061E5289BF481006FD1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5F2061E8289BF9CB006FD1A7 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		5F57189828B3A990002A86D2 /* NarutoSigns.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NarutoSigns.mlmodel; sourceTree = "<group>"; };
 		5F81B42F28ABCBBF00881FC4 /* Ninja-Naruto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ninja-Naruto.ttf"; sourceTree = "<group>"; };
 		5F81B43328ABD65E00881FC4 /* Signs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signs.swift; sourceTree = "<group>"; };
+		5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NarutoSigns.mlmodel; sourceTree = "<group>"; };
 		5FE6A70528AA91500068BF73 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		5FE6A70728ABB6420068BF73 /* HandsignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsignModel.swift; sourceTree = "<group>"; };
 		5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsignManager.swift; sourceTree = "<group>"; };
@@ -77,9 +77,9 @@
 				5F2061DD289BE84B006FD1A7 /* Preview Content */,
 				5F2061E6289BF947006FD1A7 /* SceneDelegate.swift */,
 				5F2061E8289BF9CB006FD1A7 /* MainController.swift */,
+				5FE6A70228AA87460068BF73 /* NarutoSigns.mlmodel */,
 				5FE6A70728ABB6420068BF73 /* HandsignModel.swift */,
 				5FE6A70928ABC12A0068BF73 /* HandsignManager.swift */,
-				5F57189828B3A990002A86D2 /* NarutoSigns.mlmodel */,
 			);
 			path = NarutoSigns;
 			sourceTree = "<group>";
@@ -189,10 +189,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FE6A70828ABB6420068BF73 /* HandsignModel.swift in Sources */,
+				5FE6A70328AA87460068BF73 /* NarutoSigns.mlmodel in Sources */,
 				5F2061E9289BF9CB006FD1A7 /* MainController.swift in Sources */,
 				5F2061DA289BE847006FD1A7 /* MainView.swift in Sources */,
 				5FE6A70628AA91500068BF73 /* CameraView.swift in Sources */,
-				5F57189928B3A990002A86D2 /* NarutoSigns.mlmodel in Sources */,
 				5F81B43428ABD65E00881FC4 /* Signs.swift in Sources */,
 				5F2061D8289BE847006FD1A7 /* NarutoSignsApp.swift in Sources */,
 				5F2061E7289BF947006FD1A7 /* SceneDelegate.swift in Sources */,
