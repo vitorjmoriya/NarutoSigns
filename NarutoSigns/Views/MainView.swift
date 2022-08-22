@@ -36,6 +36,9 @@ struct MainView: View {
                             .font(Font.custom("Ninja-Naruto", size: 60))
                     }
                 }
+            case .jutsu:
+                // TODO: handle jutsu here
+                EmptyView()
             }
         }
     }
@@ -116,5 +119,6 @@ extension MainView {
         case detecting
         case cooldown
         case final
+        case jutsu
     }
 }
