@@ -8,9 +8,9 @@
 class HandsignManager {
     var handSigns: [Sign]
 
-    var onDetectedHandSign: ((Sign) -> Void)?
+    var onHandSign: ((Sign, Bool) -> Void)?
 
-    private var isBoarSign: Bool = false
+    var onDetectedHandSign: ((Sign) -> Void)?
 
     static let shared = HandsignManager()
 
@@ -20,43 +20,37 @@ class HandsignManager {
 
     func addHandSign(sign: NarutoSignsOutput) {
         // This sign is the most difficult to execute & to detect, so we are giving a little help
-        if let signBoar = sign.labelProbabilities["boar"] {
-            if signBoar > 0.15 {
-                isBoarSign = true
-            }
-        }
+        var signModel: Sign?
 
-        let signModel = Sign.getSignFromString(string: sign.label)
-
-        if handSigns.count == 4 {
-            getDetectedHandSign()
-            handSigns.removeAll()
-            isBoarSign = false
-        }
-        handSigns.append(signModel)
-    }
-
-    private func getDetectedHandSign() {
-        var dict: [Sign: Int] = [:]
-
-        guard var mostDetectedSign = handSigns.first else {
-            // TODO: Log error here
-            print("Error")
-            return
-        }
-
-        handSigns.forEach { sign in
-            dict[sign, default: 0] += 1
-            
-            if dict[sign, default: 0] > dict[mostDetectedSign, default: 0] {
-                mostDetectedSign = sign
-            }
-        }
-
-        if isBoarSign {
-            onDetectedHandSign?(.boar)
+        if let signBoar = sign.labelProbabilities["boar"],
+           signBoar > 0.15 {
+            signModel = .boar
         } else {
-            onDetectedHandSign?(mostDetectedSign)
+            signModel = Sign.getSignFromString(string: sign.label)
+        }
+
+        if let signModel = signModel {
+            handSigns.append(signModel)
+            
+            if handSigns.allSatisfy({ $0 == signModel }) {
+                onHandSign?(signModel, true)
+                if handSigns.count == 4 {
+                    onDetectedHandSign?(signModel)
+                    handSigns.removeAll()
+                }
+            } else {
+                handSigns.removeAll()
+                onHandSign?(signModel, false)
+            }
         }
     }
+
+//    private func getDetectedHandSign() {
+//        Sign.allCases.forEach { sign in
+//            if handSigns.allSatisfy({ $0 == sign }) {
+//                onDetectedHandSign?(sign)
+//                return
+//            }
+//        }
+//    }
 }

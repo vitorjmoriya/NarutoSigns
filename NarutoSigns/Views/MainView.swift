@@ -20,13 +20,35 @@ struct MainView: View {
 
 //            renderControls()
 
+            renderDetectingHandSignUI()
+            
             VStack {
                 Spacer()
-                if let sign = viewModel.detectedHandSign, viewModel.cooldownTime == nil {
+                
+                if let sign = viewModel.finalHandSign {
                     Text(sign.rawValue)
-                        .foregroundColor(.white)
+                        .foregroundColor(.green)
                         .font(Font.custom("Ninja-Naruto", size: 60))
                 }
+            }
+        }
+    }
+    
+    @ViewBuilder private func renderDetectingHandSignUI() -> some View {
+        VStack {
+            HStack {
+                ForEach(0..<4, id: \.self) { index in
+                    Circle()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(index < viewModel.detectedHandSignStreak ? .green : .red)
+                }
+            }
+            
+            Spacer()
+            if let sign = viewModel.detectedHandSign, viewModel.cooldownTime == nil, viewModel.finalHandSign == nil {
+                Text(sign.rawValue)
+                    .foregroundColor(.white)
+                    .font(Font.custom("Ninja-Naruto", size: 60))
             }
         }
     }
@@ -62,7 +84,9 @@ struct MainView: View {
 
 extension MainView {
     class ViewModel: ObservableObject {
+        @Published var detectedHandSignStreak: Int = 0
         @Published var detectedHandSign: Sign? = nil
+        @Published var finalHandSign: Sign? = nil
         @Published var cooldownTime: Int? = nil
 
         let captureSession: AVCaptureSession

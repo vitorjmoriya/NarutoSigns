@@ -78,9 +78,22 @@ class MainController: UIHostingController<MainView> {
         self.handSignManager.onDetectedHandSign = { [weak self] sign in
             guard let self = self else { return }
 
-            self.viewModel.detectedHandSign = sign
             self.timeElapsed = 0
+            self.viewModel.finalHandSign = sign
             self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: self.verifyCooldownTimer)
+        }
+
+        self.handSignManager.onHandSign = { [weak self] sign, isStreak in
+            guard let self = self else { return }
+
+            self.viewModel.finalHandSign = nil
+            self.viewModel.detectedHandSign = sign
+            if isStreak {
+                self.viewModel.detectedHandSignStreak += 1
+            } else {
+                self.viewModel.detectedHandSignStreak = 0
+            }
+            print(sign)
         }
     }
 
@@ -96,6 +109,7 @@ class MainController: UIHostingController<MainView> {
         }
 
         timer.invalidate()
+        self.viewModel.detectedHandSignStreak = 0
         self.viewModel.cooldownTime = nil
     }
 }
