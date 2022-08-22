@@ -19,9 +19,9 @@ class HandsignManager {
     }
 
     func addHandSign(sign: NarutoSignsOutput) {
-        // This sign is the most difficult to execute & to detect, so we are giving a little help
         var signModel: Sign?
 
+        // This sign is the most difficult to execute & to detect, so we are giving a little help
         if let signBoar = sign.labelProbabilities["boar"],
            signBoar > 0.15 {
             signModel = .boar
