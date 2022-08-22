@@ -153,7 +153,7 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             let input: NarutoSignsInput = .init(poses: array)
 
-            let handPosePrediction = try HandsignModel.shared.model.prediction(input: input)
+            let handPosePrediction = try NarutoMLModel.shared.model.prediction(input: input)
 
             setSign(from: handPosePrediction)
         } catch {

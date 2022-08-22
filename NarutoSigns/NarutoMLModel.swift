@@ -1,12 +1,12 @@
 //
-//  HandsignModel.swift
+//  NarutoMLModel.swift
 //  NarutoSigns
 //
 //  Created by Vitor Moriya on 16/08/22.
 //
 
-struct HandsignModel {
-    static let shared = HandsignModel()
+struct NarutoMLModel {
+    static let shared = NarutoMLModel()
 
     let model: NarutoSigns
 
