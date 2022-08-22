@@ -39,6 +39,7 @@ class MainController: UIHostingController<MainView> {
 
         setupManager()
 
+        self.viewModel.state = .cooldown
         self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: verifyCooldownTimer)
     }
 
@@ -80,7 +81,11 @@ class MainController: UIHostingController<MainView> {
 
             self.timeElapsed = 0
             self.viewModel.finalHandSign = sign
-            self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: self.verifyCooldownTimer)
+            self.viewModel.state = .final
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.viewModel.state = .cooldown
+                self.cooldownTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: self.verifyCooldownTimer)
+            }
         }
 
         self.handSignManager.onHandSign = { [weak self] sign, isStreak in
@@ -111,6 +116,7 @@ class MainController: UIHostingController<MainView> {
         timer.invalidate()
         self.viewModel.detectedHandSignStreak = 0
         self.viewModel.cooldownTime = nil
+        self.viewModel.state = .detecting
     }
 }
 

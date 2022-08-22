@@ -16,19 +16,22 @@ struct MainView: View {
             CameraView(session: viewModel.captureSession)
                 .edgesIgnoringSafeArea(.all)
 
-            renderCooldownTimer()
-
-//            renderControls()
-
-            renderDetectingHandSignUI()
-            
-            VStack {
-                Spacer()
-                
-                if let sign = viewModel.finalHandSign {
-                    Text(sign.rawValue)
-                        .foregroundColor(.green)
-                        .font(Font.custom("Ninja-Naruto", size: 60))
+            switch viewModel.state {
+            case .initial:
+                EmptyView()
+            case .cooldown:
+                renderCooldownTimer()
+            case .detecting:
+                renderDetectingHandSignUI()
+            case .final:
+                VStack {
+                    Spacer()
+                    
+                    if let sign = viewModel.finalHandSign {
+                        Text(sign.rawValue)
+                            .foregroundColor(.green)
+                            .font(Font.custom("Ninja-Naruto", size: 60))
+                    }
                 }
             }
         }
@@ -90,6 +93,8 @@ struct MainView: View {
 
 extension MainView {
     class ViewModel: ObservableObject {
+        @Published var state: State = .initial
+
         @Published var detectedHandSignStreak: Int = 0
         @Published var detectedHandSign: Sign? = nil
         @Published var finalHandSign: Sign? = nil
@@ -100,5 +105,12 @@ extension MainView {
         init(captureSession: AVCaptureSession) {
             self.captureSession = captureSession
         }
+    }
+    
+    enum State: Equatable {
+        case initial
+        case detecting
+        case cooldown
+        case final
     }
 }
