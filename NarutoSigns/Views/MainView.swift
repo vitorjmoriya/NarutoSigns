@@ -36,13 +36,19 @@ struct MainView: View {
     
     @ViewBuilder private func renderDetectingHandSignUI() -> some View {
         VStack {
-            HStack {
+            HStack(spacing: 20) {
                 ForEach(0..<4, id: \.self) { index in
                     Circle()
                         .frame(width: 40, height: 40)
                         .foregroundColor(index < viewModel.detectedHandSignStreak ? .green : .red)
+                        .background(
+                            Circle()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.black)
+                        )
                 }
             }
+            .padding(.top, 20)
             
             Spacer()
             if let sign = viewModel.detectedHandSign, viewModel.cooldownTime == nil, viewModel.finalHandSign == nil {
