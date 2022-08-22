@@ -44,13 +44,4 @@ class HandsignManager {
             }
         }
     }
-
-//    private func getDetectedHandSign() {
-//        Sign.allCases.forEach { sign in
-//            if handSigns.allSatisfy({ $0 == sign }) {
-//                onDetectedHandSign?(sign)
-//                return
-//            }
-//        }
-//    }
 }
