@@ -55,6 +55,7 @@ class MainController: UIHostingController<MainView> {
         ) else {
             // TODO: Handle error in UI
             print("## No frontal camera found")
+            self.viewModel.state = .error
             return
         }
         guard let captureDeviceInput = try? AVCaptureDeviceInput(device: captureDevice),

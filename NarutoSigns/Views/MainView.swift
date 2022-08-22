@@ -19,6 +19,9 @@ struct MainView: View {
             switch viewModel.state {
             case .initial:
                 EmptyView()
+            case .error:
+                // TODO: handle error here
+                EmptyView()
             case .cooldown:
                 renderCooldownTimer()
             case .detecting:
@@ -109,6 +112,7 @@ extension MainView {
     
     enum State: Equatable {
         case initial
+        case error
         case detecting
         case cooldown
         case final
