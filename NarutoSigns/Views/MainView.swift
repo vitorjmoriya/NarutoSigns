@@ -27,15 +27,7 @@ struct MainView: View {
             case .detecting:
                 renderDetectingHandSignUI()
             case .final:
-                VStack {
-                    Spacer()
-                    
-                    if let sign = viewModel.finalHandSign {
-                        Text(sign.rawValue)
-                            .foregroundColor(.green)
-                            .font(Font.custom("Ninja-Naruto", size: 60))
-                    }
-                }
+                renderFinalSignDetected()
             case .jutsu:
                 // TODO: handle jutsu here
                 EmptyView()
@@ -73,6 +65,18 @@ struct MainView: View {
             Text(String(cooldownTime))
                 .foregroundColor(.white)
                 .font(Font.custom("Ninja-Naruto", size: 60))
+        }
+    }
+
+    @ViewBuilder private func renderFinalSignDetected() -> some View {
+        VStack {
+            Spacer()
+            
+            if let sign = viewModel.finalHandSign {
+                Text(sign.rawValue)
+                    .foregroundColor(.green)
+                    .font(Font.custom("Ninja-Naruto", size: 60))
+            }
         }
     }
 
