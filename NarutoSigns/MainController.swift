@@ -99,12 +99,10 @@ class MainController: UIHostingController<MainView> {
             } else {
                 self.viewModel.detectedHandSignStreak = 0
             }
-            print(sign)
         }
     }
 
     private func verifyCooldownTimer(timer: Timer) {
-        print(timeElapsed)
         guard timeElapsed >= cooldownTime else {
             self.viewModel.detectedHandSign = nil
             timeElapsed += 1
