@@ -169,6 +169,8 @@ extension MainController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 let sign = sign
             else {
                 self.viewModel.detectedHandSign = nil
+                self.viewModel.detectedHandSignStreak = 0
+                self.handSignManager.handSigns.removeAll()
                 return
             }
 
